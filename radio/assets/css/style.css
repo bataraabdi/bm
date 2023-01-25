@@ -376,7 +376,7 @@ section {
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding-bottom: 20px;
   position: relative;
   color: #45505b;
@@ -540,7 +540,7 @@ section {
 .resume .resume-title {
   font-size: 26px;
   font-weight: 700;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
   color: #45505b;
 }
