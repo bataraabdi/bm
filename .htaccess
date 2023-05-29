@@ -1,0 +1,4 @@
+RewriteEngine On
+#RewriteBase /
+RewriteCond %{HTTP_HOST} ^www\.binjaimengaji\.com [NC]
+RewriteRule ^(.*)$ http://binjaimengaji.com/$1 [L,R=301]
