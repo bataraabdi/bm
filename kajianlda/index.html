@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Kajian LDA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500|Open+Sans">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+body {
+	background: #fff;
+}
+.accordion .card {
+	border-radius: 6px !important;
+	border: 1px solid #eceded !important;
+	margin-bottom: 5px;
+}
+.accordion .card .card-header {
+	background: #f9fafa;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	margin-bottom: 0;
+	font-family: "Roboto", sans-serif;
+	border-radius: 6px 6px 0 0;
+	border-bottom: none;
+}
+.accordion .card-header:hover {
+	background: #ecf0f0;
+}
+.accordion .card-header h2 span {
+	float: left;
+	margin-top: 10px;
+}
+.accordion .card-header .btn {
+	color: #3659a2;
+	font-size: 1.04rem;
+	width: 100%;
+	text-align: left;
+	position: relative;
+	top: -2px;
+	font-weight: 500;
+}
+.accordion .card-header i {
+	float: right;
+	font-size: 1.3rem;
+	font-weight: bold;
+	position: relative;
+	top: 5px;
+}
+.accordion .card-header .btn:hover {
+	color: #35589f;
+}
+.accordion .card-body {
+	color: #324353;
+	text-align: justify;
+	border-top: 1px solid #eceded;
+}
+.page-title {
+	text-align: center;
+	margin: 2rem 0;
+	font-family: "Roboto", sans-serif;
+	position: relative;
+}
+.page-title::after {
+	content: "";
+	width: 100px;
+	position: absolute;
+	margin: 0 auto;
+	height: 4px;
+	border-radius: 1px;
+	background: #3659a2;
+	left: 0;
+	right: 0;
+	bottom: -15px;
+}
+</style>
+<script>
+$(document).ready(function(){
+	// Add minus icon for collapse element which is open by default
+	$(".collapse.show").each(function(){
+		$(this).siblings(".card-header").find(".btn i").html("remove");
+		$(this).prev(".card-header").addClass("highlight");
+	});
+	
+	// Toggle plus minus icon on show hide of collapse element
+	$(".collapse").on('show.bs.collapse', function(){
+		$(this).parent().find(".card-header .btn i").html("remove");
+	}).on('hide.bs.collapse', function(){
+		$(this).parent().find(".card-header .btn i").html("add");
+	});
+});
+</script>
+</head>
+<body>
+<div class="container-xl">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-title">Jadwal Kajian Rutin LDA</h1>
+			<div class="accordion" id="accordionExample">
+				<div class="card">
+					<div class="card-header" id="headingOne">
+						<h2 class="clearfix mb-0">
+							<a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Pekan Ke-1 <i class="material-icons">add</i></a>									
+						</h2>
+					</div>
+					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+						<div class="card-body">
+<h3><b><u> SENIN </u></b> </h3><p> 
+KAJIAN HARI SENIN PEKAN KE-1<p>
+HADIRILAH KAJIAN ISLAM ILMIYAH<p>
+
+📘 Materi : Kajian Tematik<br>
+🎙️ Pemateri : Ustadz Riswan Batubara Hafidzahullah Ta'ala<br>
+⏱ Waktu : Setiap Senin ba'da Maghrib s/d selesai<br>
+🕌 Tempat : Masjid Al-Hidayah. <br>
+Jl. Kecipir Dusun I Tanjung Jati - Binjai Barat<br>
+🗾 Google Map : https://goo.gl/maps/DD2MyQpEMhNui6nG8<p>
+
+
+<h3><b> <u>SELASA </u></b></h3> <p> 
+KAJIAN HARI SELASA PEKAN KE-1<p>
+HADIRILAH KAJIAN ISLAM ILMIYAH<p>
+
+📘 Materi : Kitab Muntaqo Al-Adab Asy-Syar'iyyah Penyusun Syaikh Majid Sa'id Al-Ausyan<br>
+🎙️ Pemateri : Ustadz Riswan Efendi Batubara Hafidzahullah Ta'ala<br>
+⏱ Waktu : Setiap Selasa ba'da Maghrib s/d selesai<br>
+🕌 Tempat : Masjid Husain Yahya<br>
+Dusun Tanjung Kapuk Desa Selayang Baru Kec. Selesai - Langkat <br>
+🗾 Google Map : https://maps.app.goo.gl/PEorxSKTDLrQZhmD6<p>
+
+📘 Materi : Kitab Tauhid<br>
+Syarh Syaikh Prof. Dr. Shalih bin Fauzan bin Abdillah Al-Fauzan Hafidzahullah Ta'ala<br>
+🎙️ Pemateri : Ustadz Sukirman Hafidzahullah Ta'ala<br>
+⏱ Waktu : Setiap Ahad, Selasa, Kamis, Sabtu, ba'da Maghrib s/d selesai<br>
+🕌 Tempat : Masjid Pondok Pesantren Sabilul Mukminin Binjai<br>
+Jl. Sawi No. 106A Kel. Paya Roba Kec. Binjai Barat - Binjai<br>
+🗾 Google Map : https://maps.app.goo.gl/r5yCNiMFbhjJUwWJ8<p>
+
+<h3><b> <u>RABU </u></b></h3> <p> 
+KAJIAN HARI RABU PEKAN KE-1<p>
+HADIRILAH KAJIAN ISLAM ILMIYAH<p>
+
+<h3><b> <u>KAMIS </u></b></h3> <p> 
+KAJIAN HARI KAMIS PEKAN KE-1<p>
+HADIRILAH KAJIAN ISLAM ILMIYAH<p>
+
+📘 Materi : Kitab Tauhid<br>
+Syarh Syaikh Prof. Dr. Shalih bin Fauzan bin Abdillah Al-Fauzan Hafidzahullah Ta'ala<br>
+🎙️ Pemateri : Ustadz Sukirman Hafidzahullah Ta'ala<br>
+⏱ Waktu : Setiap Ahad, Selasa, Kamis, Sabtu, ba'da Maghrib s/d selesai<br>
+🕌 Tempat : Masjid Pondok Pesantren Sabilul Mukminin Binjai<br>
+Jl. Sawi No. 106A Kel. Paya Roba Kec. Binjai Barat - Binjai<br>
+🗾 Google Map : https://maps.app.goo.gl/r5yCNiMFbhjJUwWJ8<p>
+
+<h3><b> <u>JUM'AT </u></b></h3> <p> 
+KAJIAN HARI JUM'AT PEKAN KE-1<p>
+HADIRILAH KAJIAN ISLAM ILMIYAH<p>
+
+<h3><b> <u>SABTU </u></b></h3> <p> 
+KAJIAN HARI SABTU PEKAN KE-1<p>
+HADIRILAH KAJIAN ISLAM ILMIYAH<p>
+
+📘 Materi : Kitab Tauhid<br>
+Syarh Syaikh Prof. Dr. Shalih bin Fauzan bin Abdillah Al-Fauzan Hafidzahullah Ta'ala<br>
+🎙️ Pemateri : Ustadz Sukirman Hafidzahullah Ta'ala<br>
+⏱ Waktu : Setiap Ahad, Selasa, Kamis, Sabtu, ba'da Maghrib s/d selesai<br>
+🕌 Tempat : Masjid Pondok Pesantren Sabilul Mukminin Binjai<br>
+Jl. Sawi No. 106A Kel. Paya Roba Kec. Binjai Barat - Binjai<br>
+🗾 Google Map : https://maps.app.goo.gl/r5yCNiMFbhjJUwWJ8<p>
+
+<h3><b> <u>AHAD </u></b></h3> <p> 
+KAJIAN HARI AHAD PEKAN KE-1<p>
+HADIRILAH KAJIAN ISLAM ILMIYAH<p>
+
+📘 Materi : Kitab Tauhid<br>
+Syarh Syaikh Prof. Dr. Shalih bin Fauzan bin Abdillah Al-Fauzan Hafidzahullah Ta'ala<br>
+🎙️ Pemateri : Ustadz Sukirman Hafidzahullah Ta'ala<br>
+⏱ Waktu : Setiap Ahad, Selasa, Kamis, Sabtu, ba'da Maghrib s/d selesai<br>
+🕌 Tempat : Masjid Pondok Pesantren Sabilul Mukminin Binjai<br>
+Jl. Sawi No. 106A Kel. Paya Roba Kec. Binjai Barat - Binjai<br>
+🗾 Google Map : https://maps.app.goo.gl/r5yCNiMFbhjJUwWJ8<p>
+
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingTwo">
+						<h2 class="mb-0">
+							<a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Pekan Ke-2 <i class="material-icons">add</i></a>
+						</h2>
+					</div>
+					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+						<div class="card-body">
+
+
+
+
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingThree">
+						<h2 class="mb-0">
+							<a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Pekan Ke-3 <i class="material-icons">add</i></a>                     
+						</h2>
+					</div>
+					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+						<div class="card-body">
+
+
+<h3><b> <u>RABU </u></b></h3> <p> 
+KAJIAN HARI RABU PEKAN KE-3<p>
+HADIRILAH KAJIAN ISLAM ILMIYAH<p>
+
+📘 Materi : Kitab Al-Ghuror Min Mauqufil Atsar Karya Syaikh Shalih Ibnu 'Abdillah Ibnu Hamad Al-'Ushaimi Hafidzahullahu Ta'ala<br>
+🎙️ Pemateri : Ustadz Abu Azka Kholid Hafidzahullah Ta'ala<br>
+⏱ Waktu : Setiap Senin ba'da Maghrib s/d selesai<br>
+🕌 Tempat : Masjid Al-Hidayah<br> 
+Jl. Kecipir Dusun I Tanjung Jati - Binjai Barat<br>
+🗾 Map : https://goo.gl/maps/DD2MyQpEMhNui6nG8<p>
+
+
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingFour">
+						<h2 class="mb-0">
+							<a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Pekan Ke-4 <i class="material-icons">add</i></a>                               
+						</h2>
+					</div>
+					<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+						<div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingFour">
+						<h2 class="mb-0">
+							<a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Pekan Ke-5 <i class="material-icons">add</i></a>                             
+						</h2>
+					</div>
+					<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+						<div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
