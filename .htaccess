@@ -1,4 +1,99 @@
+############################################
+# AKTIFKAN REWRITE
+############################################
 RewriteEngine On
-#RewriteBase /
-RewriteCond %{HTTP_HOST} ^www\.binjaimengaji\.com [NC]
-RewriteRule ^(.*)$ http://binjaimengaji.com/$1 [L,R=301]
+
+############################################
+# FORCE HTTPS + NON-WWW
+############################################
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.binjaimengaji\.com$ [NC]
+RewriteRule ^(.*)$ https://binjaimengaji.com/$1 [L,R=301]
+
+############################################
+# PROTEKSI XSS, MIME, CLICKJACKING
+############################################
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+############################################
+# CONTENT SECURITY POLICY (CSP)
+############################################
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "
+    default-src 'self';
+    img-src 'self' data:;
+    script-src 'self';
+    style-src 'self' 'unsafe-inline';
+    font-src 'self';
+    object-src 'none';
+    frame-ancestors 'self';
+    base-uri 'self';
+    form-action 'self';"
+</IfModule>
+
+############################################
+# BLOKIR QUERY STRING BERBAHAYA (XSS / INJECTION)
+############################################
+RewriteCond %{QUERY_STRING} (<|%3C|>|%3E|script|alert|onerror|onload|eval|base64|union|select|insert|drop|sleep|benchmark) [NC]
+RewriteRule .* - [F,L]
+
+############################################
+# BLOKIR USER-AGENT BOT / SCANNER JAHAT
+############################################
+RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|curl|wget|python|scanner|nmap) [NC]
+RewriteRule .* - [F,L]
+
+############################################
+# MATIKAN DIRECTORY LISTING
+############################################
+Options -Indexes
+
+############################################
+# PROTEKSI FILE SENSITIF
+############################################
+<FilesMatch "^(\.env|\.git|\.htaccess|\.htpasswd|composer\.json|composer\.lock|package\.json|yarn\.lock)">
+    Require all denied
+</FilesMatch>
+
+############################################
+# BLOKIR FILE BACKUP & TEMP
+############################################
+<FilesMatch "\.(bak|old|backup|sql|log|tmp|swp)$">
+    Require all denied
+</FilesMatch>
+
+############################################
+# IZINKAN HANYA FILE STATIS AMAN
+############################################
+<FilesMatch "\.(html|css|js|png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf)$">
+    Require all granted
+</FilesMatch>
+
+############################################
+# PREVENT HOTLINK GAMBAR
+############################################
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?binjaimengaji\.com/ [NC]
+RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC,L]
+
+############################################
+# CACHE STATIS (PERFORMA + KEAMANAN)
+############################################
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType text/css "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType image/* "access plus 30 days"
+</IfModule>
+
+############################################
+# DISABLE TRACE & TRACK
+############################################
+TraceEnable Off
