@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartu Ucapan Idul Fitri - Binjai Mengaji</title>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Tailwind CSS (Diisolasi dengan prefix 'tw-' agar tidak merusak tema asli website) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            prefix: 'tw-',
+            corePlugins: {
+                preflight: false,
+            }
+        }
+    </script>
+
+    <style>
+        /* Isolasi CSS khusus untuk widget ini */
+        #bm-twibbon-app {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            box-sizing: border-box;
+        }
+        #bm-twibbon-app * {
+            box-sizing: border-box;
+        }
+        .bm-canvas-bg {
+            background-color: #1e293b;
+        }
+        .bm-input {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.375rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background: white;
+            color: #333;
+        }
+        .bm-input:focus { border-color: #3b82f6; }
+        .bm-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 0.35rem;
+        }
+        .bm-range {
+            width: 100%;
+            cursor: pointer;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .bm-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- WIDGET KARTU UCAPAN START -->
+<div id="bm-twibbon-app" class="tw-max-w-6xl tw-mx-auto tw-p-4 md:tw-p-6 tw-rounded-xl tw-shadow-sm tw-border tw-border-gray-200">
+    
+    <div class="tw-text-center tw-mb-8">
+        <h2 class="tw-text-2xl md:tw-text-3xl tw-font-bold tw-text-gray-800 tw-m-0">Kirim Ucapan Idul Fitri</h2>
+        <p class="tw-text-gray-500 tw-text-sm md:tw-text-base tw-mt-2">Tulis nama Anda pada kartu ucapan resmi Binjai Mengaji sebelum mengunduhnya.</p>
+    </div>
+
+    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-12 tw-gap-8">
+        
+        <!-- KIRI: Area Preview (Canvas) -->
+        <div class="md:tw-col-span-5 tw-flex tw-flex-col tw-items-center">
+            <div class="tw-w-full tw-max-w-[420px] tw-relative tw-rounded-lg tw-overflow-hidden tw-shadow-xl tw-border tw-border-gray-300 bm-canvas-bg">
+                <!-- Canvas resolusi asli 1080x1350, responsif mengikuti wadahnya -->
+                <canvas id="tw-canvas" class="tw-w-full tw-h-auto tw-block"></canvas>
+            </div>
+            
+            <button id="bm-download-btn" class="tw-w-full tw-max-w-[420px] tw-mt-5 tw-bg-[#b8860b] hover:tw-bg-[#9a7009] tw-text-white tw-font-bold tw-py-3.5 tw-px-4 tw-rounded-lg tw-transition-colors tw-flex tw-items-center tw-justify-center tw-gap-2 tw-shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+                Unduh Kartu Ucapan
+            </button>
+            <p class="tw-text-xs tw-text-gray-400 tw-mt-2 tw-text-center">Pastikan nama sudah sesuai sebelum menekan tombol unduh.</p>
+        </div>
+
+        <!-- KANAN: Area Pengaturan Teks -->
+        <div class="md:tw-col-span-7 tw-bg-white tw-p-6 md:tw-p-8 tw-rounded-xl tw-border tw-border-gray-100 tw-shadow-sm">
+            
+            <h3 class="tw-text-xl tw-font-bold tw-text-gray-800 tw-border-b tw-pb-3 tw-mb-6">Pengaturan Teks</h3>
+            
+            <!-- Input Nama -->
+            <div class="tw-mb-6">
+                <label class="bm-label tw-text-base">Masukkan Nama Anda</label>
+                <input type="text" id="bm-name" class="bm-input bm-control tw-text-lg" placeholder="Contoh: Keluarga Besar Fulan" value="Keluarga Besar Fulan" />
+            </div>
+
+            <!-- Pengaturan Font Dasar -->
+            <div class="tw-grid tw-grid-cols-2 sm:tw-grid-cols-4 tw-gap-5 tw-mb-6">
+                <div class="sm:tw-col-span-2">
+                    <label class="bm-label">Jenis Font</label>
+                    <select id="bm-font-family" class="bm-input bm-control">
+                        <option value="Georgia" selected>Georgia</option>
+                        <option value="'Times New Roman'">Times New Roman</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="'Courier New'">Courier New</option>
+                        <option value="'Trebuchet MS'">Trebuchet MS</option>
+                        <option value="Impact">Impact</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="bm-label">Ukuran Font</label>
+                    <input type="number" id="bm-font-size" class="bm-input bm-control" value="70" min="10" max="300" />
+                </div>
+                <div>
+                    <label class="bm-label">Warna Teks</label>
+                    <!-- Warna default diset ke warna emas agar cocok dengan gambar -->
+                    <input type="color" id="bm-font-color" class="bm-input bm-control tw-h-[46px] tw-p-1 tw-cursor-pointer" value="#eec47a" />
+                </div>
+            </div>
+
+            <!-- Format Teks (Bold, Italic, Underline) -->
+            <div class="tw-mb-6">
+                <label class="bm-label">Format Teks</label>
+                <div class="tw-flex tw-flex-wrap tw-gap-6 tw-bg-gray-50 tw-p-3 tw-rounded-lg tw-border tw-border-gray-200 tw-items-center">
+                    <label class="tw-flex tw-items-center tw-gap-2 tw-cursor-pointer hover:tw-opacity-80">
+                        <input type="checkbox" id="bm-font-bold" class="bm-control tw-w-4 tw-h-4" checked>
+                        <span class="tw-font-bold tw-text-gray-700">Bold</span>
+                    </label>
+                    <label class="tw-flex tw-items-center tw-gap-2 tw-cursor-pointer hover:tw-opacity-80">
+                        <input type="checkbox" id="bm-font-italic" class="bm-control tw-w-4 tw-h-4">
+                        <span class="tw-italic tw-text-gray-700">Italic</span>
+                    </label>
+                    <label class="tw-flex tw-items-center tw-gap-2 tw-cursor-pointer hover:tw-opacity-80">
+                        <input type="checkbox" id="bm-font-underline" class="bm-control tw-w-4 tw-h-4">
+                        <span class="tw-underline tw-text-gray-700">Underline</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Posisi Teks -->
+            <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 tw-gap-8 tw-mt-2">
+                <div>
+                    <label class="bm-label tw-mb-3">Posisi Horizontal (Kiri/Kanan)</label>
+                    <input type="range" id="bm-text-x" class="bm-range bm-control" min="0" max="1080" value="540">
+                </div>
+                <div>
+                    <!-- Nilai default 350 agar pas diletakkan di bagian atas kartu -->
+                    <label class="bm-label tw-mb-3">Posisi Vertikal (Atas/Bawah)</label>
+                    <input type="range" id="bm-text-y" class="bm-range bm-control" min="0" max="1350" value="350">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Isolasi JavaScript untuk menghindari konflik dengan library website utama
+    (function($) {
+        $(document).ready(function() {
+            const canvas = document.getElementById('tw-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Setting Ukuran Pasti (1080 x 1350 px)
+            const CANVAS_W = 1080;
+            const CANVAS_H = 1350;
+            canvas.width = CANVAS_W;
+            canvas.height = CANVAS_H;
+
+            // Variabel Lebar Maksimal Teks sebelum turun ke bawah (Word Wrap)
+            // 980px artinya ada jarak aman margin (padding) 50px kiri & 50px kanan
+            const MAX_TEXT_WIDTH = 980; 
+
+            const BACKGROUND_IMAGE_URL = "https://raw.githubusercontent.com/bataraabdi/bm/refs/heads/main/assets/img/twibbonidulfitri1447.png"; 
+
+            let bgImg = new Image();
+            bgImg.crossOrigin = "anonymous"; 
+            bgImg.src = BACKGROUND_IMAGE_URL;
+
+            // Load gambar ke canvas
+            bgImg.onload = function() {
+                drawCanvas();
+            };
+            
+            // Jika gambar gagal diload (karena link belum diganti), tetap gambar canvas
+            bgImg.onerror = function() {
+                console.warn("Gambar background gagal dimuat. Menggunakan placeholder sementara.");
+                drawCanvas();
+            };
+
+            // Trigger perubahan dari input secara realtime
+            $('.bm-control').on('input change', function() {
+                drawCanvas();
+            });
+
+            // Fungsi Utama Render Canvas
+            function drawCanvas() {
+                // 1. Bersihkan canvas
+                ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+
+                // 2. Gambar Background Utama
+                if (bgImg.complete && bgImg.naturalWidth !== 0) {
+                    ctx.drawImage(bgImg, 0, 0, CANVAS_W, CANVAS_H);
+                } else {
+                    ctx.fillStyle = "#1e293b";
+                    ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+                    ctx.fillStyle = "#ffffff";
+                    ctx.font = "30px Arial";
+                    ctx.textAlign = "center";
+                    ctx.fillText("[ Memuat Background... ]", CANVAS_W/2, CANVAS_H/2);
+                }
+
+                // 3. Render Teks
+                let text = $('#bm-name').val();
+                if (text) {
+                    let fontSize = parseInt($('#bm-font-size').val());
+                    let fontFamily = $('#bm-font-family').val();
+                    let fontColor = $('#bm-font-color').val();
+                    let isBold = $('#bm-font-bold').is(':checked') ? 'bold' : '';
+                    let isItalic = $('#bm-font-italic').is(':checked') ? 'italic' : '';
+                    let isUnderline = $('#bm-font-underline').is(':checked');
+
+                    let tx = parseInt($('#bm-text-x').val());
+                    let ty = parseInt($('#bm-text-y').val());
+
+                    // Setting Gaya Teks Utama
+                    ctx.font = `${isBold} ${isItalic} ${fontSize}px ${fontFamily}`.trim();
+                    ctx.fillStyle = fontColor;
+                    ctx.textAlign = "center"; // Rata Tengah
+                    ctx.textBaseline = "middle";
+                    
+                    // ==========================================
+                    // ALGORITMA WORD WRAP (MULTILINE TEXT)
+                    // ==========================================
+                    let words = text.split(' ');
+                    let lines = [];
+                    let currentLine = words[0];
+
+                    // Pecah kata menjadi beberapa baris jika melebihi MAX_TEXT_WIDTH
+                    for (let i = 1; i < words.length; i++) {
+                        let word = words[i];
+                        let width = ctx.measureText(currentLine + " " + word).width;
+                        if (width < MAX_TEXT_WIDTH) {
+                            currentLine += " " + word;
+                        } else {
+                            lines.push(currentLine);
+                            currentLine = word;
+                        }
+                    }
+                    lines.push(currentLine);
+
+                    // Jarak tinggi tiap baris (Line Height)
+                    let lineHeight = fontSize * 1.3; 
+                    
+                    // Kalkulasi titik awal 'Y' supaya text yang multiline tetap Center/Rata Tengah secara vertikal
+                    let startY = ty - ((lines.length - 1) * lineHeight) / 2;
+
+                    // Beri bayangan teks
+                    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+                    ctx.shadowBlur = 4;
+                    ctx.shadowOffsetX = 1;
+                    ctx.shadowOffsetY = 1;
+
+                    // Tulis Setiap Baris Teks
+                    for (let i = 0; i < lines.length; i++) {
+                        ctx.fillText(lines[i], tx, startY + (i * lineHeight));
+                    }
+
+                    // ==========================================
+                    // ALGORITMA RENDER GARIS BAWAH (UNDERLINE)
+                    // ==========================================
+                    if (isUnderline) {
+                        ctx.shadowColor = "transparent"; // Hilangkan bayangan untuk garis
+                        ctx.strokeStyle = fontColor;
+                        ctx.lineWidth = Math.max(2, fontSize * 0.05); // Tebal garis proporsional
+                        
+                        // Gambar garis untuk setiap baris
+                        for (let i = 0; i < lines.length; i++) {
+                            let textWidth = ctx.measureText(lines[i]).width;
+                            let underlineY = startY + (i * lineHeight) + (fontSize * 0.45); 
+                            
+                            ctx.beginPath();
+                            ctx.moveTo(tx - textWidth/2, underlineY);
+                            ctx.lineTo(tx + textWidth/2, underlineY);
+                            ctx.stroke();
+                        }
+                    }
+                    
+                    // Reset shadow untuk mencegah efek aneh di proses render berikutnya
+                    ctx.shadowColor = "transparent";
+                }
+            }
+
+            // Fungsi Eksekusi Unduh/Download
+            $('#bm-download-btn').on('click', function() {
+                try {
+                    const dataURL = canvas.toDataURL('image/png', 1.0);
+                    const link = document.createElement('a');
+                    link.download = 'Ucapan-IdulFitri-BinjaiMengaji.png';
+                    link.href = dataURL;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } catch (err) {
+                    alert("Gagal mengunduh! Pastikan URL gambar background (BACKGROUND_IMAGE_URL) sudah berada di dalam server/domain yang sama dengan website (binjaimengaji.com) untuk menghindari isu keamanan browser (CORS).");
+                    console.error(err);
+                }
+            });
+
+            // Initial Draw
+            setTimeout(drawCanvas, 100);
+        });
+    })(jQuery);
+</script>
+<!-- WIDGET KARTU UCAPAN END -->
+
+</body>
+</html>
